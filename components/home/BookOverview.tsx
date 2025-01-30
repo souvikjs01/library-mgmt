@@ -49,13 +49,13 @@ export default function BookOverview({title, author, genre, rating, total_copies
                 varient="wide"
                 className='z-10'
                 coverColor={color}
-                coverUrl={cover}
+                coverImage={cover}
             />
             <div className=' absolute left-16 top-10 rotate-12 opacity-40 max-sm:hidden'>
                 <BookCover 
                     varient="wide"
                     coverColor={color}
-                    coverUrl={cover}
+                    coverImage={cover}
                 />  
             </div>
         </div>

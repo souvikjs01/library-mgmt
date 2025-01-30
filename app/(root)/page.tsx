@@ -8,7 +8,9 @@ const page = () => {
       <BookOverview {...sampleBooks[0]}/>
 
       <BookList 
-
+        title="Latest Books"
+        books={sampleBooks}
+        containerClassName="mt-20"
       />
     </>
   )
