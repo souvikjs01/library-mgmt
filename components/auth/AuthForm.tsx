@@ -62,7 +62,7 @@ export default function AuthForm<T extends FieldValues> ({ schema, type, default
                             <FormItem>
                                 <FormLabel className=" capitalize">{FIELD_NAMES[field.name as keyof typeof FIELD_NAMES]}</FormLabel>
                                 <FormControl>
-                                    {field.name === "universityCard" ? <UploadImage /> :
+                                    {field.name === "universityCard" ? <UploadImage onFileChange={field.onChange} /> :
                                         <Input 
                                             required 
                                             type={
