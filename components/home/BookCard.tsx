@@ -6,18 +6,27 @@ import Image from 'next/image'
 import { Button } from '../ui/button'
 
 
+interface Props extends Book {
+    id: string;
+    title: string;
+    genre: string;
+    coverColor: string;
+    coverUrl: string;
+    isLoanedBook?: boolean;
+}
+
 export default function BookCard({
     id,
     title,
     genre,
-    color,
-    cover,
-    isLoanedBook,
-}: Book) {
+    coverColor,
+    coverUrl,
+    isLoanedBook = false,
+}: Props) {
   return (
     <li className={cn(isLoanedBook && "xs:w-52 w-full")}>
         <Link href={`/books/${id}`} className={cn(isLoanedBook && "w-full flex flex-col items-center")}>
-            <BookCover coverColor={color} coverImage={cover} />
+            <BookCover coverColor={coverColor} coverImage={coverUrl} />
             <div className={cn("mt-4", !isLoanedBook && "xs:max-w-40 max-w-28")}>
                 <p className='book-title'>{title}</p>
                 <p className='book-genre'>{genre}</p>

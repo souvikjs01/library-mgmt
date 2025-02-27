@@ -1,21 +1,35 @@
 import BookList from '@/components/home/BookList'
-import { Button } from '@/components/ui/button'
 import { sampleBooks } from '@/constants'
-import { signOut } from '@/lib/auth'
+import { auth } from '@/lib/auth';
+import { prisma } from '@/lib/prisma';
 import React from 'react'
 
-function page() {
+async function page() {
+  const session = await auth()
+  
+  const latestBooks = await prisma.book.findMany({
+    orderBy: { 
+      createdAt: "desc" 
+    },
+    take: 10,
+  }) as Book[];
+
   return (
     <>
-        <form action={async() => {
+        {/* <form action={async() => {
             "use server"
             await signOut()
         }} className=' mb-10'
         >
             <Button>Logout</Button>
-        </form>
+        </form> */}
 
-        <BookList title='Borrowed Books' books={sampleBooks}/>
+        {/* <BookList title='Borrowed Books' books={sampleBooks}/> */}
+        <BookList 
+          title="Latest Books"
+          books={latestBooks.slice(1)}
+          // containerClassName="mt-20"
+        />
     </>
   )
 }

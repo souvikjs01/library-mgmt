@@ -22,7 +22,7 @@ import {
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
 import { FIELD_NAMES, FIELD_TYPES } from "@/constants"
-import UploadImage from "./UploadImage"
+import FileUpload from "./FileUpload"
 import { toast } from "sonner"
 import { useRouter } from "next/navigation"
 
@@ -76,7 +76,16 @@ export default function AuthForm<T extends FieldValues> ({ schema, type, default
                             <FormItem>
                                 <FormLabel className=" capitalize">{FIELD_NAMES[field.name as keyof typeof FIELD_NAMES]}</FormLabel>
                                 <FormControl>
-                                    {field.name === "universityCard" ? <UploadImage onFileChange={field.onChange} /> :
+                                    {field.name === "universityCard" ? (
+                                        <FileUpload 
+                                            type='image'
+                                            accept='image/*'
+                                            placeholder="Upload your ID"
+                                            folder="ids"
+                                            variant='dark'
+                                            onFileChange={field.onChange}                                        
+                                        />
+                                    ) :
                                         <Input 
                                             required 
                                             type={

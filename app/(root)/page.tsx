@@ -1,15 +1,29 @@
 import BookList from "@/components/home/BookList"
 import BookOverview from "@/components/home/BookOverview"
-import { sampleBooks } from "@/constants"
+// import { sampleBooks } from "@/constants"
+import { auth } from "@/lib/auth"
+import { prisma } from "@/lib/prisma"
 
-const page = () => {
+const page = async () => {
+  const session = await auth()
+
+  const latestBooks = await prisma.book.findMany({
+    orderBy: { 
+      createdAt: "desc" 
+    },
+    take: 10,
+  }) as Book[];
+  
   return (
     <>
-      <BookOverview {...sampleBooks[0]}/>
+      <BookOverview 
+        {...latestBooks[0]}
+        userId={session?.user?.id!}
+      />
 
       <BookList 
         title="Latest Books"
-        books={sampleBooks}
+        books={latestBooks.slice(1)}
         containerClassName="mt-20"
       />
     </>
