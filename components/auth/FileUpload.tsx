@@ -49,8 +49,7 @@ export default function FileUpload({ type, accept, placeholder, folder, variant,
   }
 
   const onError = (error : any) => {
-    console.log(error);
-
+    console.log("err is :" + error);
     toast(`${type} upload failed`, {
       description: `Your ${type} could not be uploaded. Please try again.`,
     })    
