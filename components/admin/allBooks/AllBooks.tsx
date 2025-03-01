@@ -1,7 +1,8 @@
 import { prisma } from '@/lib/prisma'
-import Image from 'next/image'
 import React from 'react'
 import { PencilIcon, TrashIcon } from "lucide-react"
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 const getAllBooks = async () => {
   try {
     const books = await prisma.book.findMany()
@@ -61,7 +62,15 @@ async function AllBooks() {
                       })}
                     </td>
                     <td className="px-2 py-2 w-[10%] text-center">
-                      <button className="text-blue-600 hover:text-blue-800 text-sm">View</button>
+                      <Button
+                        className='text-blue-600 hover:text-blue-800 text-sm'
+                        variant="ghost"
+                        asChild
+                      >
+                        <Link href={`/admin/books/${book.id}`}>
+                          View        
+                        </Link>
+                      </Button>
                     </td>
                     <td className="px-2 py-2 w-[10%] text-center">
                       <div className="flex items-center gap-2">

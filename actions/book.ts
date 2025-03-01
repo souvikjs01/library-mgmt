@@ -46,3 +46,20 @@ export const borrowBook = async (params: BorrowBookParams) => {
         return { success: false, error: "Internal server error" + error}        
     }
 }
+
+export const getBookDetails = async (id: string) => {
+    try {
+        const book = await prisma.book.findUnique({
+            where: {
+                id
+            }
+        })
+        if(!book) {
+            return {success: false, error: "Error fetching book" }
+        }
+        return { success: true, data: book }
+    } catch (error) {
+        console.log(error);
+        return { success: false, error: "Internal server error" }
+    }
+}
