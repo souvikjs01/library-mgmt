@@ -25,7 +25,8 @@ const authenticator = async () => {
     
     return { token, expire, signature }
   } catch (error) {
-    
+    console.log("Failed to authenticate");
+    throw new Error("Internal server error ")    
   }
 }
 interface Props {
@@ -117,9 +118,6 @@ export default function FileUpload({ type, accept, placeholder, folder, variant,
         <Image src="/icons/upload.svg" alt='upload-icons' width={20} height={20} className=' object-contain'/>
 
         <p className={cn(' text-base text-light-100', styles.placeholder)}>{placeholder}</p>
-        {/* {file && (
-          <p className='mt-1 text-center text-xs'>{file.filePath}</p>
-        )} */}
       </button>
       
       {progress > 0 && progress !==100 && (
